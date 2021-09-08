@@ -1,4 +1,4 @@
-package com.madtechet.crazypoker.ui.theme
+package com.madtechet.crazypoker.shared.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
