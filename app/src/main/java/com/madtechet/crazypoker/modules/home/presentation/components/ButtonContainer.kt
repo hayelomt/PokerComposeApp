@@ -17,7 +17,7 @@ fun ButtonContainer(
         CreateGame(
             onCreateGame = {
                 createGame(it)
-                showMessage("Submitted, awaiting result", SnackTypes.Message)
+//                showMessage("Submitted, awaiting result", SnackTypes.Message)
             }
         )
         JoinGame(

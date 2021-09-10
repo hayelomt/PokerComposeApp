@@ -12,7 +12,7 @@ fun CreateGameDialog(
     onConfirm: (String) -> Unit,
     onDismiss: () -> Unit
 ) {
-    var username by remember { mutableStateOf("") }
+    var username by remember { mutableStateOf("titan") }
     var fieldTouched by remember { mutableStateOf(false) }
     val isInValid = username.length < 3 || username.length > 6
 

@@ -14,49 +14,32 @@ import com.madtechet.crazypoker.modules.home.presentation.components.ButtonConta
 import com.madtechet.crazypoker.shared.ui.components.AlertSnack
 import com.madtechet.crazypoker.shared.utils.SnackTypes
 import com.madtechet.crazypoker.shared.utils.logIt
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 @Composable
 fun HomeContent(
     createGame: (String) -> Unit,
     joinGame: (String, String) -> Unit,
+    showMessage: (String, SnackTypes) -> Job
 ) {
     logIt("Home Content")
-    val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-    var snackType by remember { mutableStateOf(SnackTypes.Message) }
 
-    val showMessage = { message: String, type: SnackTypes ->
-        snackType = type
-        scope.launch {
-            scaffoldState.snackbarHostState.showSnackbar(message)
-        }
-    }
-
-    Scaffold(
-        scaffoldState = scaffoldState,
-        snackbarHost = {
-            SnackbarHost(it) { data ->
-                AlertSnack(message = data.message, snackType = snackType)
-            }
-        }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            ButtonContainer(
-                createGame = createGame,
-                joinGame = joinGame,
-                showMessage = showMessage
-            )
-        }
+        ButtonContainer(
+            createGame = createGame,
+            joinGame = joinGame,
+            showMessage = showMessage
+        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewHomeContent() {
-    HomeContent(createGame = {}, joinGame = { _, _ -> })
+    HomeContent(createGame = {}, joinGame = { _, _ -> }, { _, _ -> Job() })
 }
