@@ -1,4 +1,4 @@
-package com.madtechet.crazypoker.modules.home
+package com.madtechet.crazypoker.modules.home.viewmodel
 
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel

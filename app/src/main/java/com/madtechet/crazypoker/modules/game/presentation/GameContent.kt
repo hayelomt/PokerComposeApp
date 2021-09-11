@@ -58,7 +58,8 @@ fun PreviewGameContent() {
                 true,
                 {},
                 false,
-                {}
+                {},
+                true
             )
         },
         cardListing = {

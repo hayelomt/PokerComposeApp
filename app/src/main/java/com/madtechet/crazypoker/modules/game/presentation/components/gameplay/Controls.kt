@@ -21,7 +21,8 @@ fun Controls(
     playEnabled: Boolean,
     onPlay: (String) -> Unit,
     skipEnabled: Boolean,
-    onSkip: () -> Unit
+    onSkip: () -> Unit,
+    asEnabled: Boolean
 ) {
     val items = listOf("", "club", "diamond", "heart", "spade")
     var selectedSuite by remember { mutableStateOf(items[0]) }
@@ -29,8 +30,8 @@ fun Controls(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp)
-            .padding(all = 10.dp)
+            .height(60.dp)
+            .padding(all = 5.dp)
     ) {
         Row(
             modifier = Modifier
@@ -46,12 +47,13 @@ fun Controls(
                 Text("Skip")
             }
         }
-        SuiteDropdown(
-            onIndexChange = { selectedSuite = items[it] },
-            items = items,
-            selectedSuite = selectedSuite
-        )
-
+        if (asEnabled) {
+            SuiteDropdown(
+                onIndexChange = { selectedSuite = items[it] },
+                items = items,
+                selectedSuite = selectedSuite
+            )
+        }
     }
 }
 
@@ -97,9 +99,9 @@ fun SuiteDropdown(
                     items.forEachIndexed { index, s ->
                         DropdownMenuItem(
                             onClick = {
-                            onIndexChange(index)
-                            expanded = false
-                        },
+                                onIndexChange(index)
+                                expanded = false
+                            },
                             modifier = Modifier
                                 .fillMaxWidth(),
                             contentPadding = PaddingValues(0.dp)
@@ -119,7 +121,20 @@ fun PreviewControls() {
     Controls(
         true,
         {},
+        true,
+        {},
+        asEnabled = true
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewControlsDisabled() {
+    Controls(
         false,
-        {}
+        {},
+        false,
+        {},
+        asEnabled = false
     )
 }

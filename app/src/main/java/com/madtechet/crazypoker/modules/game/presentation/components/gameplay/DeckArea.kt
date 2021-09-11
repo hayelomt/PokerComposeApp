@@ -1,5 +1,6 @@
 package com.madtechet.crazypoker.modules.game.presentation.components.gameplay
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,6 +15,7 @@ import com.madtechet.crazypoker.modules.game.utils.getPokerDrawable
 fun DeckArea(
     modifier: Modifier = Modifier,
     topCard: Poker? = null,
+    onBackCardTap: () -> Unit = {}
 ) {
     Row(
         modifier = modifier
@@ -22,7 +24,7 @@ fun DeckArea(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        PokerCardBack()
+        PokerCardBack(Modifier.clickable { onBackCardTap() })
         topCard?.let {
             PokerCard(pokerDrawable = getPokerDrawable(topCard), expanded = true)
         }

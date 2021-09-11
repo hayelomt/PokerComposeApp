@@ -13,12 +13,12 @@ import androidx.compose.ui.unit.dp
 import com.madtechet.crazypoker.R
 
 @Composable
-fun PokerCardBack() {
+fun PokerCardBack(modifier: Modifier = Modifier) {
     Image(
         painter = painterResource(id = R.drawable.card_back),
         contentDescription = null,
         contentScale = ContentScale.Fit,
-        modifier = Modifier
+        modifier = modifier
             .width(127.dp)
             .height(185.dp)
             .border(

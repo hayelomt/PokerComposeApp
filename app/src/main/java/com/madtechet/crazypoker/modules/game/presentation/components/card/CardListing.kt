@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.madtechet.crazypoker.modules.game.model.Poker
 import com.madtechet.crazypoker.modules.game.utils.getPokerDrawable
+import com.madtechet.crazypoker.shared.utils.logIt
 
 @Composable
 fun CardListing(
@@ -23,7 +24,7 @@ fun CardListing(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(200.dp)
+            .height(180.dp)
             .padding(horizontal = 15.dp)
             .border(BorderStroke(1.dp, Color.Black)),
     ) {
@@ -34,13 +35,17 @@ fun CardListing(
             items(cards) { card ->
                 Box(modifier = Modifier
                     .fillMaxHeight()
-                    .clickable { onCardTouch(card) }) {
+                    ) {
                     PokerCard(
                         pokerDrawable = getPokerDrawable(card),
                         expanded = card.expanded,
-                        modifier = Modifier.align(
-                            if (card.expanded) Alignment.TopCenter else Alignment.BottomCenter
-                        )
+//                        modifier = Modifier.align(
+//                            if (card.expanded) Alignment.TopCenter else Alignment.BottomCenter
+//                        ),
+                        modifier = Modifier.align(Alignment.BottomCenter),
+                        onTap = {
+                            onCardTouch(card)
+                        }
                     )
                 }
             }

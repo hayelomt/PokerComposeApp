@@ -7,7 +7,7 @@ data class Poker(
     val identifier: String,
     val suite: String,
     val value: String,
-    val expanded: Boolean = false
+    var expanded: Boolean = false
 )
 
 data class PokerDrawable(
