@@ -1,4 +1,4 @@
-package com.madtechet.crazypoker.modules.home.presentation.components
+package com.madtechet.crazypoker.modules.home.presentation.components.join
 
 
 import androidx.compose.foundation.layout.Column

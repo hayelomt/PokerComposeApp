@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.madtechet.crazypoker.modules.app.navigation.AppNavigation
+import com.madtechet.crazypoker.modules.game.presentation.components.gameplay.Controls
+import com.madtechet.crazypoker.modules.game.presentation.components.status.CurrentSuite
+import com.madtechet.crazypoker.modules.game.presentation.components.status.Players
 import com.madtechet.crazypoker.shared.network.SocketHandler
 import com.madtechet.crazypoker.shared.ui.theme.CrazyPokerTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,12 +15,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SocketHandler.setSocket()
-        SocketHandler.establishConnection()
+//        SocketHandler.setSocket()
+//        SocketHandler.establishConnection()
 
         setContent {
             CrazyPokerTheme {
-                AppNavigation()
+//                AppNavigation()
             }
         }
     }

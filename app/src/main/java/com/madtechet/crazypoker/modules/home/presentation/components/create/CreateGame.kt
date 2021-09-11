@@ -1,9 +1,10 @@
-package com.madtechet.crazypoker.modules.home.presentation.components
+package com.madtechet.crazypoker.modules.home.presentation.components.create
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import com.madtechet.crazypoker.modules.home.presentation.components.ActionButton
 
 @Composable
 fun CreateGame(onCreateGame: (String) -> Unit) {
