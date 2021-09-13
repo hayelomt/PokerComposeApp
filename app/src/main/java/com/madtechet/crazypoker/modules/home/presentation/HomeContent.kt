@@ -23,7 +23,7 @@ fun HomeContent(
     joinGame: (String, String) -> Unit,
     showMessage: (String, SnackTypes) -> Job
 ) {
-    logIt("Home Content")
+//    logIt("Home Content")
 
     Column(
         modifier = Modifier.fillMaxSize(),

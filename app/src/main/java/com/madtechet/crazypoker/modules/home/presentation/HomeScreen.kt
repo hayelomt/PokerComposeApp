@@ -1,10 +1,9 @@
 package com.madtechet.crazypoker.modules.home.presentation
 
-import androidx.compose.material.Scaffold
-import androidx.compose.material.SnackbarHost
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.navigation.NavHostController
+import com.madtechet.crazypoker.modules.app.navigation.Screen
 import com.madtechet.crazypoker.modules.home.viewmodel.HomeViewModel
 import com.madtechet.crazypoker.shared.ui.components.AlertSnack
 import com.madtechet.crazypoker.shared.utils.SnackTypes
@@ -30,6 +29,8 @@ fun HomeScreen(navController: NavHostController, homeVewModel: HomeViewModel) {
     homeVewModel.navigateGame.let { goToGame ->
         if (goToGame) {
             logIt("Navigate to game screen $goToGame")
+            navController.navigate(Screen.Game.withArgs(homeVewModel.gameId!!))
+            homeVewModel.clearNavigate()
         }
     }
 
@@ -39,6 +40,10 @@ fun HomeScreen(navController: NavHostController, homeVewModel: HomeViewModel) {
             showMessage("errMsg", SnackTypes.Message)
             homeVewModel.clearError()
         }
+    }
+
+    LaunchedEffect(key1 = true) {
+//        navController.navigate(Screen.Game.withArgs("12221"))
     }
 
     Scaffold(

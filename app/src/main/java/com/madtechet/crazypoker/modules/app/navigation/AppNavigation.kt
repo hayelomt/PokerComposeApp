@@ -13,14 +13,14 @@ import com.madtechet.crazypoker.modules.home.presentation.HomeScreen
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.Game.route) {
+    NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) {
             val homeViewModel: HomeViewModel = hiltViewModel()
             HomeScreen(navController, homeViewModel)
         }
-        composable(Screen.Game.route) {
+        composable("${Screen.Game.route}/{gameId}") {
             val gameViewModel: GameViewModel = hiltViewModel()
-            GameScreen(gameViewModel)
+            GameScreen(gameViewModel, navController)
         }
     }
 }
