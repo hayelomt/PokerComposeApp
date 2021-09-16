@@ -23,3 +23,14 @@ object CurrentPlayerFactory {
         return Gson().fromJson(data.toString(), CurrentPlayerDto::class.java)
     }
 }
+
+data class PlayerJoinedDto(
+    var player: String,
+    var playersCount: Int,
+)
+
+object PlayerJoinedFactory {
+    fun fromSocket(data: Any): PlayerJoinedDto {
+        return Gson().fromJson(data.toString(), PlayerJoinedDto::class.java)
+    }
+}

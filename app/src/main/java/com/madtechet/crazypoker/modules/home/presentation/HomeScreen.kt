@@ -3,28 +3,14 @@ package com.madtechet.crazypoker.modules.home.presentation
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.navigation.NavHostController
+import com.madtechet.crazypoker.modules.app.container.ContainerScreen
 import com.madtechet.crazypoker.modules.app.navigation.Screen
 import com.madtechet.crazypoker.modules.home.viewmodel.HomeViewModel
-import com.madtechet.crazypoker.shared.ui.components.AlertSnack
 import com.madtechet.crazypoker.shared.utils.SnackTypes
 import com.madtechet.crazypoker.shared.utils.logIt
-import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(navController: NavHostController, homeVewModel: HomeViewModel) {
-    val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-    var snackType by remember { mutableStateOf(SnackTypes.Message) }
-
-    val showMessage = { message: String, type: SnackTypes ->
-        scope.launch {
-            logIt("Snack Type: $type")
-            snackType = type
-//            scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
-            scaffoldState.snackbarHostState.showSnackbar(message)
-        }
-    }
-
     // VM Listeners
     homeVewModel.navigateGame.let { goToGame ->
         if (goToGame) {
@@ -34,30 +20,16 @@ fun HomeScreen(navController: NavHostController, homeVewModel: HomeViewModel) {
         }
     }
 
-    homeVewModel.homeError.let { errMsg ->
-        if (errMsg != null && errMsg.isNotBlank()) {
-            showMessage(errMsg, SnackTypes.Error)
-            showMessage("errMsg", SnackTypes.Message)
-            homeVewModel.clearError()
-        }
-    }
-
     LaunchedEffect(key1 = true) {
-//        navController.navigate(Screen.Game.withArgs("12221"))
+//        navController.navigate(Screen.Game.withArgs("6142fcefcdc73fbab66b1756"))
     }
 
-    Scaffold(
-        scaffoldState = scaffoldState,
-        snackbarHost = {
-            SnackbarHost(it) { data ->
-                AlertSnack(message = data.message, snackType = snackType)
-            }
-        }
-    ) {
+    ContainerScreen(containerViewModel = homeVewModel) {
         HomeContent(
             createGame = homeVewModel::createGame,
             joinGame = homeVewModel::joinGame,
-            showMessage = showMessage
+            showMessage = homeVewModel::showMessage
         )
     }
+
 }

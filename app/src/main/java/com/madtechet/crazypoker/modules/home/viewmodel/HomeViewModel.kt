@@ -1,9 +1,10 @@
 package com.madtechet.crazypoker.modules.home.viewmodel
 
 import androidx.compose.runtime.*
-import androidx.lifecycle.ViewModel
+import com.madtechet.crazypoker.modules.app.container.ContainerViewModel
 import com.madtechet.crazypoker.modules.home.model.GameCreatedFactory
 import com.madtechet.crazypoker.shared.model.ErrorFactory
+import com.madtechet.crazypoker.shared.utils.SnackTypes
 import com.madtechet.crazypoker.shared.utils.SocketEvents
 import com.madtechet.crazypoker.shared.utils.logIt
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,18 +14,16 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val socket: Socket
-): ViewModel() {
+): ContainerViewModel() {
     var navigateGame by mutableStateOf(false)
-        private set
-    var homeError by mutableStateOf<String?>(null)
         private set
     var gameId by mutableStateOf<String?>(null)
         private set
 
     init {
-        socket.on(SocketEvents.gameCreated) { args ->
+        socket.on(SocketEvents.createdGame) { args ->
+            logIt("Game Created ${args[0]}")
             val gameCreated = GameCreatedFactory.fromSocket(args[0])
-//            logIt("Game Created ${args[0]} $gameCreated")
             gameId = gameCreated.id
             navigateGame = true
         }
@@ -35,13 +34,10 @@ class HomeViewModel @Inject constructor(
         socket.on(SocketEvents.errorEvent) { args ->
             logIt("Error ${args[0]}")
             val errorMsg = ErrorFactory.fromSocket(args[0])
-            homeError = errorMsg.message
+            showMessage(errorMsg.message)
         }
-//        socket.emit(SocketEvents.createGame, "titan")
-    }
 
-    fun clearError() {
-        homeError = null
+//        socket.emit(SocketEvents.createGame, "titan")
     }
 
     fun clearNavigate() {
@@ -49,12 +45,12 @@ class HomeViewModel @Inject constructor(
     }
 
     fun createGame(username: String) {
-        logIt("Create game $username")
+//        logIt("Create game $username")
         socket.emit(SocketEvents.createGame, username)
     }
 
     fun joinGame(joinTag: String, username: String) {
-        logIt("Join Game $joinTag - $username")
+//        logIt("Join Game $joinTag - $username")
         socket.emit(SocketEvents.joinGame, joinTag, username)
     }
 }

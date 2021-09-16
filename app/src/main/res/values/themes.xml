@@ -19,7 +19,4 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.CrazyPoker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.CrazyPoker.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

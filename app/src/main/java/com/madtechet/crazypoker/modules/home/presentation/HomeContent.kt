@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 fun HomeContent(
     createGame: (String) -> Unit,
     joinGame: (String, String) -> Unit,
-    showMessage: (String, SnackTypes) -> Job
+    showMessage: (String) -> Unit
 ) {
 //    logIt("Home Content")
 
@@ -41,5 +41,5 @@ fun HomeContent(
 @Preview(showBackground = true)
 @Composable
 fun PreviewHomeContent() {
-    HomeContent(createGame = {}, joinGame = { _, _ -> }, { _, _ -> Job() })
+    HomeContent(createGame = {}, joinGame = { _, _ -> }, { })
 }

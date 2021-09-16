@@ -13,19 +13,18 @@ import kotlinx.coroutines.Job
 fun ButtonContainer(
     createGame: (String) -> Unit,
     joinGame: (String, String) -> Unit,
-    showMessage: (String, SnackTypes) -> Job
+    showMessage: (String) -> Unit
 ) {
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
         CreateGame(
             onCreateGame = {
                 createGame(it)
-//                showMessage("Submitted, awaiting result", SnackTypes.Message)
             }
         )
         JoinGame(
             onJoin = { joinTag, username ->
                 joinGame(joinTag, username)
-                showMessage("Joining game...", SnackTypes.Message)
+                showMessage("Joining game...")
             }
         )
     }
@@ -37,8 +36,6 @@ fun PreviewButtonContainer() {
     ButtonContainer(
         {},
         {_, _ -> },
-        showMessage = { _, _ ->
-            Job()
-        }
+        showMessage = {}
     )
 }

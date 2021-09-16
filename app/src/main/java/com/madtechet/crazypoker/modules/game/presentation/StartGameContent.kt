@@ -13,6 +13,7 @@ import com.madtechet.crazypoker.modules.home.presentation.components.ActionButto
 @Composable
 fun StartGameContent(
     joinTag: String,
+    playersCount: Int,
     onStartGame: () -> Unit
 ) {
     Column(
@@ -21,17 +22,21 @@ fun StartGameContent(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ActionButton(onClick = { onStartGame()}) {
-            Text(text = "Start Game")
+            Column(verticalArrangement = Arrangement.Center) {
+                Text(text = "Start")
+                Text(text = "Game")
+            }
         }
         Spacer(modifier = Modifier.height(20.dp))
         Text(text = "Join Tag: $joinTag")
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(text = "Players: $playersCount")
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewStartGame() {
-    StartGameContent("1eadd") {
-
+    StartGameContent("1eadd", 4) {
     }
 }
